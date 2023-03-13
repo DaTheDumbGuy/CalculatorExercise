@@ -1,0 +1,19 @@
+HTML
+    -History Section
+
+CSS/Bootstrap
+    -Fullscreen spacing and design
+    -Buttons padding
+    -Buttons Border
+    -Buttons shadow
+    -BG-color
+    
+JavaScript
+    -Percentage
+    -History Button
+    -History Record for other calculation(%, sqr, sqrt, )
+    -Input value limitation
+    -Displaying value(1100 -> 1,100)
+    -Equal calculation(num = num operator)
+
+Test the calculator for other bugs.
