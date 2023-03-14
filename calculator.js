@@ -49,7 +49,6 @@ function input(value) {
                     operation = value;
                     currentVal = Number(calcInput.value.replace(/,/g, ''));
                     calcStaged.textContent = `${currentVal} ${operation} `;
-                    alert("tes2t");
                     break;
                 } else if (operation == "=") {
                     operation = value;
@@ -70,7 +69,6 @@ function input(value) {
                 reset = true;
                 currentVal = Number(calcInput.value.replace(/,/g, ''));
                 calcStaged.textContent = `${currentVal} ${operation} `;
-                alert("test");
             }
 
             break;
