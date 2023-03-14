@@ -51,6 +51,10 @@ function input(value) {
                     operation = value;
                     calcStaged.textContent = `${currentVal} ${operation} `;
                     break;
+                } else if (operation == "=") {
+                    operation = value;
+                    calcStaged.textContent = `${calcInput.value} ${operation}`;
+                    break;
                 }
                 // } else if (currentVal == "0") {
                 //     // currentVal = Number(calcInput.value);
@@ -63,10 +67,12 @@ function input(value) {
                 //     reset = true;
                 //     break;
                 // }
-                stagedVal = Number(calcInput.value);
-                calcInput.value = calculate(currentVal, stagedVal, operation);
+                // calcInput.value = calcInput.value.replace(/,/g, '')
+                stagedVal = Number(calcInput.value.replace(/,/g, ''));
+                // alert(`${stagedVal} Testing`);
+                calcInput.value = calculate(currentVal, stagedVal, operation).toLocaleString('en-US');
 
-                currentVal = Number(calcInput.value);
+                currentVal = Number(calcInput.value.replace(/,/g, ''));
                 operation = value;
                 calcStaged.textContent = `${currentVal} ${operation}`;
                 reset = true;
@@ -75,7 +81,8 @@ function input(value) {
             } else {
                 operation = value;
                 reset = true;
-                currentVal = Number(calcInput.value);
+                currentVal = Number(calcInput.value.replace(/,/g, ''));
+                // alert(`${currentVal} -- Testing`);
                 calcStaged.textContent = `${currentVal} ${operation} `;
             }
 
@@ -89,8 +96,8 @@ function input(value) {
                     reset = true;
                     break;
                 }
-                stagedVal = Number(calcInput.value);
-                calcInput.value = calculate(currentVal, stagedVal, operation);
+                stagedVal = Number(calcInput.value.replace(/,/g, ''));
+                calcInput.value = calculate(currentVal, stagedVal, operation).toLocaleString('en-US');
                 calcStaged.textContent = `${currentVal} ${operation} ${stagedVal} ${value}`;
                 currentVal = calcInput.value;
                 reset = true;
@@ -98,7 +105,7 @@ function input(value) {
             } else {
                 operation = value;
                 reset = true;
-                currentVal = Number(calcInput.value);
+                currentVal = Number(calcInput.value.replace(/,/g, ''));
                 calcStaged.textContent = `${currentVal} ${operation} `;
             }
             break;
@@ -121,17 +128,17 @@ function input(value) {
             break;
 
         case "sqrt":
-            currentVal = Math.sqrt(calcInput.value);
-            calcStaged.textContent = `√${calcInput.value}`
-            calcInput.value = currentVal;
+            currentVal = Math.sqrt(calcInput.value.replace(/,/g, ''));
+            calcStaged.textContent = `√${calcInput.value.replace(/,/g, '')}`
+            calcInput.value = parseFloat(currentVal).toLocaleString('en-US');
             reset = true;
             // Math.sqrt(calcInput.value);
             break;
 
         case "sqr":
-            currentVal = parseFloat(calcInput.value) ** 2;
-            calcStaged.textContent = `sqr(${calcInput.value})`;
-            calcInput.value = currentVal;
+            currentVal = parseFloat(calcInput.value.replace(/,/g, '')) ** 2;
+            calcStaged.textContent = `sqr(${calcInput.value.replace(/,/g, '')})`;
+            calcInput.value = parseFloat(currentVal).toLocaleString('en-US');
             reset = true;
             break;
 
@@ -141,7 +148,7 @@ function input(value) {
                 reset = true;
             } else {
                 calcStaged.textContent = `1/(${calcInput.value})`
-                currentVal = 1 / parseFloat(calcInput.value);
+                currentVal = 1 / parseFloat(calcInput.value.replace(/,/g, ''));
                 calcInput.value = currentVal;
                 reset = true;
             }
@@ -149,15 +156,15 @@ function input(value) {
             // calcInput.value = calcInput.value.slice(0, 0, "-");
             break;
         case "+/-":
-            //bug fixed
-            stagedVal = parseFloat(calcInput.value);
+
+            stagedVal = parseFloat(calcInput.value.replace(/,/g, ''));
             if (stagedVal < 0) {
                 stagedVal = stagedVal * -1;
-                calcInput.value = stagedVal;
+                calcInput.value = stagedVal.toLocaleString('en-US');
 
             } else {
                 stagedVal = stagedVal * -1;
-                calcInput.value = stagedVal;
+                calcInput.value = stagedVal.toLocaleString('en-US');
 
 
             }
@@ -201,9 +208,18 @@ function input(value) {
                 calcInput.value = value
                 reset = false;
             } else {
+                if (calcInput.value.length > 16) {
+                    break;
+                }
                 calcInput.value += value;
+                calcInput.value = calcInput.value.replace(/,/g, '');
+                calcInput.value = parseFloat(calcInput.value).toLocaleString('en-US');
+                // alert(`${typeof calcInput.value} -- ${calcInput.value}`);
+                // calcInput.value = calcInput.value.toLocaleString();
+                // alert(calcInput.value.toLocaleString());
 
             }
+
             break;
     }
 

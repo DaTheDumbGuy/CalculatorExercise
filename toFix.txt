@@ -4,16 +4,18 @@ HTML
 CSS/Bootstrap
     -Fullscreen spacing and design
     -Buttons padding
-    -Buttons Border
-    -Buttons shadow
-    -BG-color
+    -Buttons Border -> [Fixed]
+    -Buttons shadow ->[Fixed, Probably]
+    -BG-color -> [Fixed]
     
 JavaScript
     -Percentage
     -History Button
-    -History Record for other calculation(%, sqr, sqrt, )
-    -Input value limitation
-    -Displaying value(1100 -> 1,100)
-    -Equal calculation(num = num operator)
+    -History Record for other calculation(%, sqr, sqrt)
+    -Input value limitation -> [Fixed]
+    -Displaying value(1100 -> 1,100) -> [Fixed]
+    -Equal calculation(num = num operator) -> [Fixed]
+    -0 / 0 = NaN, it should be = "Result is Undefined"(New)
+    -Square root of negative number is NaN, it should be "Invalid Input"(New)
 
 Test the calculator for other bugs.
