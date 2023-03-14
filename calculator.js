@@ -1,4 +1,6 @@
+//For fullscreen, Adjust the design and spacing
 document.getElementById("fullscreenBtn").addEventListener("click", function () {
+    alert("FullScreen Feature is not done! Thank you for your Understanding!");
     var modal = document.querySelector("#calculator .modal-dialog");
     var sectionOne = document.querySelector("#sectionOne");
     var sectionTwo = document.querySelector("#sectionTwo");
@@ -24,8 +26,6 @@ document.getElementById("fullscreenBtn").addEventListener("click", function () {
 });
 
 
-
-//num = num operator(Bug)
 // Initialize variables
 let calcStaged = document.getElementById("calcStaged");
 let calcInput = document.getElementById("calcInput");
@@ -45,31 +45,19 @@ function input(value) {
         case "÷":
             // If an operation was already selected, calculate the result
             if (operation) {
-
                 if (reset) {
-                    // console.log("reset");
                     operation = value;
+                    currentVal = Number(calcInput.value.replace(/,/g, ''));
                     calcStaged.textContent = `${currentVal} ${operation} `;
+                    alert("tes2t");
                     break;
                 } else if (operation == "=") {
                     operation = value;
                     calcStaged.textContent = `${calcInput.value} ${operation}`;
                     break;
                 }
-                // } else if (currentVal == "0") {
-                //     // currentVal = Number(calcInput.value);
-                //     stagedVal = Number(calcInput.value);
-                //     calcInput.value = calculate(currentVal, stagedVal, operation);
-                //     currentVal = Number(calcInput.value);
-                //     stagedVal = Number(calcInput.value);
-                //     operation = value
-                //     calcStaged.textContent = `${currentVal} ${operation} `;
-                //     reset = true;
-                //     break;
-                // }
-                // calcInput.value = calcInput.value.replace(/,/g, '')
+                // calcInput.value = calcInput.value.replace(/,/g, '');
                 stagedVal = Number(calcInput.value.replace(/,/g, ''));
-                // alert(`${stagedVal} Testing`);
                 calcInput.value = calculate(currentVal, stagedVal, operation).toLocaleString('en-US');
 
                 currentVal = Number(calcInput.value.replace(/,/g, ''));
@@ -77,13 +65,12 @@ function input(value) {
                 calcStaged.textContent = `${currentVal} ${operation}`;
                 reset = true;
 
-
             } else {
                 operation = value;
                 reset = true;
                 currentVal = Number(calcInput.value.replace(/,/g, ''));
-                // alert(`${currentVal} -- Testing`);
                 calcStaged.textContent = `${currentVal} ${operation} `;
+                alert("test");
             }
 
             break;
@@ -123,8 +110,13 @@ function input(value) {
             break;
 
         case "backspace":
-            // calcInput.value = calcInput.value.slice(0, -1);
-            calcInput.value = (calcInput.value.length == 1) ? "0" : calcInput.value.slice(0, -1);
+            if (calcInput.value.includes('.')) {
+                calcInput.value = (calcInput.value.length == 1) ? "0" : calcInput.value.slice(0, -1);
+            } else {
+                calcInput.value = (calcInput.value.length == 1) ? "0" : calcInput.value.slice(0, -1);
+                calcInput.value = calcInput.value.replace(/,/g, '');
+                calcInput.value = parseFloat(calcInput.value).toLocaleString('en-US');
+            }
             break;
 
         case "sqrt":
@@ -132,13 +124,14 @@ function input(value) {
             calcStaged.textContent = `√${calcInput.value.replace(/,/g, '')}`
             calcInput.value = parseFloat(currentVal).toLocaleString('en-US');
             reset = true;
-            // Math.sqrt(calcInput.value);
+
             break;
 
         case "sqr":
             currentVal = parseFloat(calcInput.value.replace(/,/g, '')) ** 2;
             calcStaged.textContent = `sqr(${calcInput.value.replace(/,/g, '')})`;
             calcInput.value = parseFloat(currentVal).toLocaleString('en-US');
+
             reset = true;
             break;
 
@@ -152,8 +145,7 @@ function input(value) {
                 calcInput.value = currentVal;
                 reset = true;
             }
-            // calcInput.value = (calcInput.value == "0") ? "Cannot devide by zero" : 1 / parseFloat(calcInput.value);
-            // calcInput.value = calcInput.value.slice(0, 0, "-");
+
             break;
         case "+/-":
 
@@ -188,14 +180,11 @@ function input(value) {
             break;
 
         case "%":
-            // if (operation) {
-            //     stagedVal = parseFloat(calcInput.value) % 0.    
 
-            // }
             break;
 
         case ".":
-            if (calcInput.value.includes(".")) {
+            if (calcInput.value.includes('.')) {
                 break;
             } else {
                 calcInput.value += ".";
@@ -211,12 +200,13 @@ function input(value) {
                 if (calcInput.value.length > 16) {
                     break;
                 }
-                calcInput.value += value;
-                calcInput.value = calcInput.value.replace(/,/g, '');
-                calcInput.value = parseFloat(calcInput.value).toLocaleString('en-US');
-                // alert(`${typeof calcInput.value} -- ${calcInput.value}`);
-                // calcInput.value = calcInput.value.toLocaleString();
-                // alert(calcInput.value.toLocaleString());
+                if (calcInput.value.includes('.')) {
+                    calcInput.value += value;
+                } else {
+                    calcInput.value += value;
+                    calcInput.value = calcInput.value.replace(/,/g, '');
+                    calcInput.value = parseFloat(calcInput.value).toLocaleString('en-US');
+                }
 
             }
 
@@ -241,7 +231,7 @@ function calculate(val1, val2, op) {
             return val1 / val2;
     }
 }
-//Do something about this shit -> Only the calculate function record history. 
+//Do something about this shit -> Only the calculate function is being recorded in history. 
 function recordHistory(num1, num2, op) {
     let count = historyData.length;
     historyData[count] = {
@@ -253,7 +243,7 @@ function recordHistory(num1, num2, op) {
 
 }
 
-//test history Data
+//Test history Data
 function test() {
     console.log(historyData);
 }

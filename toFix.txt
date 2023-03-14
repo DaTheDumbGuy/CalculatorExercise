@@ -17,5 +17,9 @@ JavaScript
     -Equal calculation(num = num operator) -> [Fixed]
     -0 / 0 = NaN, it should be = "Result is Undefined"(New)
     -Square root of negative number is NaN, it should be "Invalid Input"(New)
-
+    -There's bug in ('.')(New) -> [Fixed]
+    -Calculation error with toLocaleString(New) -> [Fixed]  
+    -Backspace toLocalString Bug{1,232 -> 1,23}(New) -> [Fixed]
+    -There's a bug when you backspace after calculating 1/x.(New) -> [Fixed]
+    -6 = 3 = + is bug(New) -> [Fixed]
 Test the calculator for other bugs.
